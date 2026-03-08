@@ -17,7 +17,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Discover how intelligent chatbots can handle 80% of routine inquiries, freeing your team to focus on complex customer issues.",
     content: "In today's fast-paced business environment, customer service is more important than ever. AI-powered chatbots are revolutionizing how businesses interact with their customers. They can handle inquiries 24/7, provide instant responses, and learn from every interaction.\n\nOur clients have seen a 10x improvement in response times and significant cost savings by implementing intelligent chatbot systems. Whether you're running a law practice, logistics firm, or service business, a custom AI chatbot trained on your business data can transform your customer experience.",
     author: "BEC Solutions",
-    imageUrl: "https://images.unsplash.com/photo-1677442d019cecf8115f3a7db08d5ffe?w=800&h=400&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=400&fit=crop",
     createdAt: "2025-01-15T00:00:00Z",
   },
   {
