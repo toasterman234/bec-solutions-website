@@ -1,6 +1,9 @@
 import type { Express } from "express";
 import type { Server } from "http";
 import { storage } from "./storage";
+import { db } from "./db";
+import { blogPosts } from "@shared/schema";
+import { eq } from "drizzle-orm";
 import { api } from "@shared/routes";
 import { z } from "zod";
 
@@ -40,12 +43,24 @@ async function seedBlogPosts() {
   }
 }
 
+async function fixBrokenImageUrls() {
+  const posts = await storage.getBlogPosts();
+  for (const post of posts) {
+    if (post.imageUrl && !post.imageUrl.startsWith("http")) {
+      const fixed = "https://images.unsplash.com" + post.imageUrl;
+      await db.update(blogPosts).set({ imageUrl: fixed }).where(eq(blogPosts.id, post.id));
+    }
+  }
+}
+
 export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
   // Seed blog posts on startup
   await seedBlogPosts();
+  // Fix any existing records with broken (relative) image URLs
+  await fixBrokenImageUrls();
 
   // Lead routes
   app.post(api.leads.create.path, async (req, res) => {
