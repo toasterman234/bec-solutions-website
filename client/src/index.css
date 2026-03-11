@@ -12,34 +12,34 @@
     /* Deep Dark Professional Theme */
     --background: 240 10% 4%;
     --foreground: 0 0% 100%;
-    
+
     --card: 240 10% 8%;
     --card-foreground: 0 0% 100%;
-    
+
     --popover: 240 10% 8%;
     --popover-foreground: 0 0% 100%;
-    
-    /* Electric Cyan for AI/Tech vibe */
-    --primary: 184 100% 50%;
+
+    /* Restrained teal accent - premium, not neon */
+    --primary: 174 58% 42%;
     --primary-foreground: 240 10% 4%;
-    
+
     /* Subtle muted blues/grays */
     --secondary: 240 10% 12%;
     --secondary-foreground: 0 0% 100%;
-    
+
     --muted: 240 10% 12%;
     --muted-foreground: 240 5% 65%;
-    
+
     /* Deep Purple Accent */
     --accent: 271 76% 53%;
     --accent-foreground: 0 0% 100%;
-    
+
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 240 10% 15%;
     --input: 240 10% 15%;
-    --ring: 184 100% 50%;
+    --ring: 174 58% 42%;
 
     --radius: 0.75rem;
   }
@@ -47,13 +47,25 @@
   body {
     @apply bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground;
     font-family: var(--font-sans);
-    background-image: 
-      radial-gradient(circle at 15% 50%, rgba(0, 240, 255, 0.04) 0%, transparent 50%),
-      radial-gradient(circle at 85% 30%, rgba(138, 43, 226, 0.04) 0%, transparent 50%);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% 0%, hsl(220 12% 12% / 0.6) 0%, transparent 70%);
     background-attachment: fixed;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  /* Dark charcoal for hero - deeper than page background */
+  .hero-dark {
+    background-color: hsl(220 14% 6%);
+    background-image:
+      radial-gradient(ellipse 60% 40% at 20% 50%, hsl(174 58% 20% / 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 30% at 80% 30%, hsl(220 10% 12% / 0.5) 0%, transparent 50%);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
     @apply tracking-tight;
   }
@@ -63,17 +75,25 @@
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
   }
-  
+
   .glass-card {
-    @apply bg-card/40 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
+    @apply bg-card/40 backdrop-blur-xl border border-white/10;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   }
 
-  .hover-glow {
-    @apply transition-all duration-300;
+  /* Premium bento-style card */
+  .bento-card {
+    @apply rounded-2xl border border-white/[0.08] bg-card/60 backdrop-blur-sm transition-all duration-300;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.2);
   }
-  
-  .hover-glow:hover {
-    box-shadow: 0 0 20px -5px hsl(var(--primary) / 0.4);
-    border-color: hsl(var(--primary) / 0.3);
+
+  .bento-card:hover {
+    @apply border-white/[0.12];
+    box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Visible focus for keyboard users - spec: "visible focus states" */
+  .focus-visible-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
 }
