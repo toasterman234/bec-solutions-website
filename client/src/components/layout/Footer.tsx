@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Workflow, MapPin, Mail, Phone } from "lucide-react";
+import { Cpu, MapPin, Mail, Phone } from "lucide-react";
 
 export function Footer() {
   return (
@@ -9,17 +9,17 @@ export function Footer() {
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4 group">
               <div className="p-2 rounded-xl bg-primary/10 text-primary">
-                <Workflow className="w-5 h-5" aria-hidden />
+                <Cpu className="w-5 h-5" />
               </div>
               <span className="font-display font-bold text-xl tracking-wide text-foreground">
                 BEC<span className="text-primary">.</span>Solutions
               </span>
             </Link>
             <p className="text-muted-foreground max-w-sm">
-              BEC Solutions helps small businesses improve the way work gets done—practical workflow automation and process improvement for less manual work and better response times.
+              Empowering local Memphis businesses with state-of-the-art AI integration and workflow automation. We don't just upgrade your tech; we upgrade your potential.
             </p>
           </div>
-
+          
           <div>
             <h4 className="font-display font-semibold text-lg mb-4 text-foreground">Company</h4>
             <ul className="space-y-3">
@@ -30,10 +30,7 @@ export function Footer() {
                 <Link href="/services" className="text-muted-foreground hover:text-primary transition-colors">Services</Link>
               </li>
               <li>
-                <Link href="/#about" className="text-muted-foreground hover:text-primary transition-colors">About</Link>
-              </li>
-              <li>
-                <Link href="/#contact" className="text-muted-foreground hover:text-primary transition-colors">Contact</Link>
+                <Link href="/#about" className="text-muted-foreground hover:text-primary transition-colors">About Us</Link>
               </li>
             </ul>
           </div>
@@ -43,7 +40,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-3 text-muted-foreground">
                 <MapPin className="w-5 h-5 text-primary shrink-0" />
-                <span>Memphis, TN<br />Local & Proud</span>
+                <span>Memphis, TN<br/>Local & Proud</span>
               </li>
               <li className="flex items-center gap-3 text-muted-foreground">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
@@ -56,7 +53,7 @@ export function Footer() {
             </ul>
           </div>
         </div>
-
+        
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} BEC Solutions. All rights reserved.

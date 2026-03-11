@@ -7,4 +7,3 @@ vite.config.ts.*
 dist/
 .env
 
-.vercel
