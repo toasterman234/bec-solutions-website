@@ -65,7 +65,8 @@
   }
 
   .glass-card {
-    @apply bg-card/95 backdrop-blur-xl border border-border shadow-[0_4px_24px_-4px_rgba(0, 0, 0, 0.08)];
+    @apply bg-card/95 backdrop-blur-xl border border-border;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.08);
   }
 
   .hover-glow {
