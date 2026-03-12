@@ -17,16 +17,8 @@ export function ThemePicker() {
   const [selectedId, setSelectedId] = useState<ThemeId | null>(null);
 
   useEffect(() => {
-    const stored = getStoredTheme();
-    if (stored) {
-      const theme = getTheme(stored);
-      if (theme) {
-        applyTheme(theme);
-        setSelectedId(stored);
-      }
-    } else {
-      setSelectedId("white-black");
-    }
+    // Never apply stored theme — site is always white & black
+    setSelectedId("white-black");
   }, []);
 
   function handleSelect(id: ThemeId) {
