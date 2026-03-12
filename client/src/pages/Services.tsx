@@ -100,7 +100,7 @@ export default function Services() {
             </motion.p>
             <motion.div variants={fadeInUp}>
               <Link href="/#contact">
-                <Button size="lg" className="rounded-full px-8 py-5 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_4px_24px_-4px_hsl(var(--primary)/0.3)] transition-all duration-300">
+                <Button size="lg" className="rounded-full px-8 py-5 bg-accent text-accent-foreground hover:bg-accent/90 hover:shadow-[0_4px_24px_-4px_hsl(var(--accent)/0.3)] transition-all duration-300">
                   Start with a free audit <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
@@ -184,7 +184,7 @@ export default function Services() {
                 Most of what we build is one-of-a-kind. Tell us what's eating your team's time — we'll tell you if and how we can fix it.
               </p>
               <Link href="/#contact">
-                <Button size="lg" className="rounded-full px-8 py-5 bg-foreground text-background hover:bg-foreground/90 hover:scale-105 transition-all shadow-xl">
+                <Button size="lg" className="rounded-full px-8 py-5 bg-accent text-accent-foreground hover:bg-accent/90 hover:scale-105 transition-all shadow-xl">
                   Book a Free Workflow Audit
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>

@@ -9,11 +9,11 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4 group">
-              <div className="p-2 rounded-xl bg-primary/10 text-primary">
+              <div className="p-2 rounded-xl bg-accent/10 text-accent">
                 <Cpu className="w-5 h-5" />
               </div>
               <span className="font-display font-bold text-xl tracking-wide text-foreground">
-                BEC<span className="text-primary">.</span>Solutions
+                BEC<span className="text-accent">.</span>Solutions
               </span>
             </Link>
             <p className="text-muted-foreground max-w-sm">
@@ -25,13 +25,13 @@ export function Footer() {
             <h4 className="font-display font-semibold text-lg mb-4 text-foreground">Company</h4>
             <ul className="space-y-3">
               <li>
-                <Link href="/" className="text-muted-foreground hover:text-primary transition-colors">Home</Link>
+                <Link href="/" className="text-muted-foreground hover:text-accent transition-colors">Home</Link>
               </li>
               <li>
-                <Link href="/services" className="text-muted-foreground hover:text-primary transition-colors">Services</Link>
+                <Link href="/services" className="text-muted-foreground hover:text-accent transition-colors">Services</Link>
               </li>
               <li>
-                <Link href="/#about" className="text-muted-foreground hover:text-primary transition-colors">About Us</Link>
+                <Link href="/#about" className="text-muted-foreground hover:text-accent transition-colors">About Us</Link>
               </li>
             </ul>
           </div>
@@ -40,15 +40,15 @@ export function Footer() {
             <h4 className="font-display font-semibold text-lg mb-4 text-foreground">Contact</h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-3 text-muted-foreground">
-                <MapPin className="w-5 h-5 text-primary shrink-0" />
+                <MapPin className="w-5 h-5 text-accent shrink-0" />
                 <span>Memphis, TN<br />Local & Proud</span>
               </li>
               <li className="flex items-center gap-3 text-muted-foreground">
-                <Mail className="w-5 h-5 text-primary shrink-0" />
-                <a href="mailto:hello@bec.solutions" className="hover:text-primary transition-colors">hello@bec.solutions</a>
+                <Mail className="w-5 h-5 text-accent shrink-0" />
+                <a href="mailto:hello@bec.solutions" className="hover:text-accent transition-colors">hello@bec.solutions</a>
               </li>
               <li className="flex items-center gap-3 text-muted-foreground">
-                <Phone className="w-5 h-5 text-primary shrink-0" />
+                <Phone className="w-5 h-5 text-accent shrink-0" />
                 <span>(901) 555-0199</span>
               </li>
             </ul>
@@ -61,8 +61,8 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
             <ThemePicker />
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-accent transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-accent transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

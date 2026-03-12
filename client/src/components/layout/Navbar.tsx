@@ -33,11 +33,11 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group nav-logo">
-            <div className="p-2 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300 nav-logo-icon">
+            <div className="p-2 rounded-xl bg-accent/10 text-accent group-hover:bg-accent group-hover:text-accent-foreground transition-colors duration-300 nav-logo-icon">
               <Cpu className="w-6 h-6" />
             </div>
             <span className="font-display font-bold text-xl tracking-wide text-foreground nav-logo-text">
-              BEC<span className="text-primary nav-logo-dot">.</span>Solutions
+              BEC<span className="text-accent nav-logo-dot">.</span>Solutions
             </span>
           </Link>
 
@@ -47,14 +47,14 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors duration-200 hover:text-primary nav-link ${location === link.href ? "text-primary nav-link-active" : "text-muted-foreground"
+                className={`text-sm font-medium transition-colors duration-200 hover:text-accent nav-link ${location === link.href ? "text-accent nav-link-active" : "text-muted-foreground"
                   }`}
               >
                 {link.label}
               </Link>
             ))}
             <Link href="/#contact">
-              <Button className="rounded-full px-6 bg-primary text-primary-foreground hover:bg-primary/90 transition-all nav-cta">
+              <Button className="rounded-full px-6 bg-accent text-accent-foreground hover:bg-accent/90 transition-all nav-cta">
                 Get Started
               </Button>
             </Link>
@@ -92,7 +92,7 @@ export function Navbar() {
                 </Link>
               ))}
               <Link href="/#contact" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button className="w-full mt-4 rounded-xl bg-primary text-primary-foreground">
+                <Button className="w-full mt-4 rounded-xl bg-accent text-accent-foreground">
                   Get Started
                 </Button>
               </Link>

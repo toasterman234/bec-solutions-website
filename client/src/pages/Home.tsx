@@ -231,7 +231,7 @@ export default function Home() {
                 variants={fadeInUp}
                 className="text-center"
               >
-                <div className="font-display text-4xl md:text-5xl font-bold text-primary mb-2">
+                <div className="font-display text-4xl md:text-5xl font-bold text-accent mb-2">
                   {stat.value}
                 </div>
                 <p className="text-sm text-muted-foreground whitespace-pre-line">
@@ -288,15 +288,15 @@ export default function Home() {
                 transition={{ delay: i * 0.08 }}
               >
                 <Link href={item.href}>
-                  <div className="group glass-card rounded-2xl p-6 h-full border border-border hover:border-primary/30 transition-all duration-300 flex flex-col">
-                    <div className="p-3 rounded-xl bg-primary/10 text-primary w-fit mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                  <div className="group glass-card rounded-2xl p-6 h-full border border-border hover:border-accent/40 transition-all duration-300 flex flex-col">
+                    <div className="p-3 rounded-xl bg-accent/10 text-accent w-fit mb-4 group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
                       {item.icon}
                     </div>
-                    <h3 className="font-display text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                    <h3 className="font-display text-lg font-bold mb-2 group-hover:text-accent transition-colors">
                       {item.title}
                     </h3>
                     <p className="text-muted-foreground text-sm flex-1">{item.desc}</p>
-                    <span className="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3">
+                    <span className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-3">
                       Read More <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>
@@ -368,7 +368,7 @@ export default function Home() {
               <Button
                 size="lg"
                 variant="outline"
-                className="rounded-full px-8 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                className="rounded-full px-8 border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground"
               >
                 Explore Free Audit <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
@@ -402,7 +402,7 @@ export default function Home() {
             </motion.p>
             <motion.div variants={fadeInUp}>
               <Link href="/services">
-                <Button variant="outline" className="rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                <Button variant="outline" className="rounded-full border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground">
                   View All Projects <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
@@ -418,11 +418,11 @@ export default function Home() {
                 transition={{ delay: i * 0.08 }}
               >
                 <Link href="/services">
-                  <div className="glass-card rounded-2xl p-6 h-full border border-border hover:border-primary/30 transition-all duration-300 flex flex-col group">
-                    <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-3">
+                  <div className="glass-card rounded-2xl p-6 h-full border border-border hover:border-accent/40 transition-all duration-300 flex flex-col group">
+                    <span className="text-xs font-semibold text-accent uppercase tracking-wider mb-3">
                       {proj.type === "case-study" ? "Case Study" : "Project"}
                     </span>
-                    <h3 className="font-display text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                    <h3 className="font-display text-lg font-bold mb-2 group-hover:text-accent transition-colors">
                       {proj.title}
                     </h3>
                     <p className="text-muted-foreground text-sm flex-1">{proj.desc}</p>
@@ -490,7 +490,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6"
           >
-            <MapPin className="w-5 h-5 text-primary shrink-0" />
+            <MapPin className="w-5 h-5 text-accent shrink-0" />
             <p className="font-display text-lg md:text-xl font-semibold text-foreground">
               Memphis-Based & Proud — We know what local businesses actually need.
             </p>

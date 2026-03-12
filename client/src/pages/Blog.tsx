@@ -69,7 +69,7 @@ export default function Blog() {
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your Business?</h2>
             <p className="text-muted-foreground text-lg mb-8">Let's discuss how AI and automation can help you reclaim time and scale without growing pains.</p>
             <Link href="/#contact">
-              <Button size="lg" className="rounded-full px-8 bg-primary text-primary-foreground hover:bg-primary/90">
+              <Button size="lg" className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90">
                 Schedule a Free Consultation <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
