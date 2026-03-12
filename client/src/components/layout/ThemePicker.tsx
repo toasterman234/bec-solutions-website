@@ -25,7 +25,7 @@ export function ThemePicker() {
         setSelectedId(stored);
       }
     } else {
-      setSelectedId("porcelain-light");
+      setSelectedId("white-black");
     }
   }, []);
 

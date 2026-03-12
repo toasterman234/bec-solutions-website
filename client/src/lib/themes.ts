@@ -1,4 +1,6 @@
 export type ThemeId =
+  | "white-black"
+  | "deepsense" /* black & blue — inspired by deepsense.ai */
   | "porcelain-light"
   | "navy-coral-cream"
   | "forest-gold-ivory"
@@ -18,6 +20,68 @@ export interface Theme {
 
 /** 3-color palettes for site theme picker — HSL values for Tailwind CSS variables */
 export const themes: Theme[] = [
+  {
+    id: "white-black",
+    name: "White & Black",
+    bodyBg: "#ffffff",
+    variables: {
+      "--background": "0 0% 100%",
+      "--foreground": "0 0% 0%",
+      "--card": "0 0% 100%",
+      "--card-foreground": "0 0% 0%",
+      "--popover": "0 0% 100%",
+      "--popover-foreground": "0 0% 0%",
+      "--primary": "0 0% 0%",
+      "--primary-foreground": "0 0% 100%",
+      "--secondary": "0 0% 15%",
+      "--secondary-foreground": "0 0% 100%",
+      "--muted": "0 0% 96%",
+      "--muted-foreground": "0 0% 45%",
+      "--accent": "0 0% 0%",
+      "--accent-foreground": "0 0% 100%",
+      "--border": "0 0% 90%",
+      "--input": "0 0% 90%",
+      "--ring": "0 0% 0%",
+      "--hero-bg": "0 0% 100%",
+      "--hero-foreground": "0 0% 0%",
+      "--hero-cta-bg": "0 0% 0%",
+      "--hero-cta-foreground": "0 0% 100%",
+      "--nav-over-hero-fg": "0 0% 0%",
+      "--nav-over-hero-accent": "0 0% 0%",
+    },
+  },
+  {
+    id: "deepsense",
+    name: "Deepsense",
+    bodyBg: "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
+    variables: {
+      "--background": "0 0% 100%",
+      "--foreground": "220 20% 10%",
+      "--card": "0 0% 100%",
+      "--card-foreground": "220 20% 10%",
+      "--popover": "0 0% 100%",
+      "--popover-foreground": "220 20% 10%",
+      "--primary": "214 100% 45%",
+      "--primary-foreground": "0 0% 100%",
+      "--secondary": "220 20% 15%",
+      "--secondary-foreground": "0 0% 100%",
+      "--muted": "220 14% 96%",
+      "--muted-foreground": "220 15% 40%",
+      "--accent": "214 100% 45%",
+      "--accent-foreground": "0 0% 100%",
+      "--border": "220 13% 91%",
+      "--input": "220 13% 91%",
+      "--ring": "214 100% 45%",
+      /* Hero section — royal blue bg, white text, black CTA */
+      "--hero-bg": "214 100% 45%",
+      "--hero-foreground": "0 0% 100%",
+      "--hero-cta-bg": "0 0% 0%",
+      "--hero-cta-foreground": "0 0% 100%",
+      /* Nav over blue hero */
+      "--nav-over-hero-fg": "0 0% 100%",
+      "--nav-over-hero-accent": "0 0% 100%",
+    },
+  },
   {
     id: "porcelain-light",
     name: "Porcelain Light",
@@ -40,6 +104,10 @@ export const themes: Theme[] = [
       "--border": "204 94% 90%",
       "--input": "204 94% 90%",
       "--ring": "199 98% 40%",
+      "--hero-bg": "204 100% 97%",
+      "--hero-foreground": "199 80% 24%",
+      "--hero-cta-bg": "199 98% 40%",
+      "--hero-cta-foreground": "0 0% 100%",
     },
   },
   {

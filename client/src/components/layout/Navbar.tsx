@@ -21,21 +21,23 @@ export function Navbar() {
     { href: "/blog", label: "Blog" },
   ];
 
+  const overHero = !isScrolled && location === "/";
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${isScrolled
-          ? "bg-background/80 backdrop-blur-md border-border py-3 shadow-lg"
-          : "bg-transparent border-transparent py-5"
-        }`}
+        ? "bg-background/80 backdrop-blur-md border-border py-3 shadow-lg"
+        : "bg-transparent border-transparent py-5"
+        } ${overHero ? "nav-over-hero" : ""}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="p-2 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+          <Link href="/" className="flex items-center gap-2 group nav-logo">
+            <div className="p-2 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300 nav-logo-icon">
               <Cpu className="w-6 h-6" />
             </div>
-            <span className="font-display font-bold text-xl tracking-wide text-foreground">
-              BEC<span className="text-primary">.</span>Solutions
+            <span className="font-display font-bold text-xl tracking-wide text-foreground nav-logo-text">
+              BEC<span className="text-primary nav-logo-dot">.</span>Solutions
             </span>
           </Link>
 
@@ -45,14 +47,14 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors duration-200 hover:text-primary ${location === link.href ? "text-primary" : "text-muted-foreground"
+                className={`text-sm font-medium transition-colors duration-200 hover:text-primary nav-link ${location === link.href ? "text-primary nav-link-active" : "text-muted-foreground"
                   }`}
               >
                 {link.label}
               </Link>
             ))}
             <Link href="/#contact">
-              <Button className="rounded-full px-6 bg-primary text-primary-foreground hover:bg-primary/90 transition-all">
+              <Button className="rounded-full px-6 bg-primary text-primary-foreground hover:bg-primary/90 transition-all nav-cta">
                 Get Started
               </Button>
             </Link>
@@ -60,7 +62,7 @@ export function Navbar() {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden p-2 text-muted-foreground hover:text-foreground"
+            className="md:hidden p-2 text-muted-foreground hover:text-foreground nav-mobile-toggle"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

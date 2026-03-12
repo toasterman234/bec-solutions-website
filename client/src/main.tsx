@@ -9,7 +9,7 @@ if (stored) {
   const theme = getTheme(stored);
   if (theme) applyTheme(theme);
 } else {
-  const defaultTheme = getTheme("porcelain-light");
+  const defaultTheme = getTheme("white-black");
   if (defaultTheme) applyTheme(defaultTheme);
 }
 
