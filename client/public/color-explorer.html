@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEC Solutions — Color Palette Explorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=Manrope:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: #0f0f12;
+      color: #e4e4e7;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p.subtitle {
+      color: #71717a;
+      margin-bottom: 2rem;
+    }
+
+    .palettes {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .palette-card {
+      background: #18181b;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      border: 1px solid #27272a;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .palette-card:hover {
+      border-color: #3f3f46;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .palette-card.selected {
+      border-color: #a78bfa;
+      box-shadow: 0 0 0 2px #a78bfa40;
+    }
+
+    .palette-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .palette-desc {
+      font-size: 0.8rem;
+      color: #71717a;
+      margin-bottom: 1rem;
+    }
+
+    .preview {
+      border-radius: 0.75rem;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .preview-hero {
+      padding: 1.5rem;
+      min-height: 100px;
+    }
+
+    .preview-hero h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .preview-hero p {
+      font-size: 0.7rem;
+      opacity: 0.85;
+      line-height: 1.4;
+    }
+
+    .preview-buttons {
+      padding: 1rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .preview-btn {
+      padding: 0.4rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      border: none;
+      cursor: default;
+    }
+
+    .preview-card {
+      margin: 1rem;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.7rem;
+      line-height: 1.4;
+    }
+
+    .swatches {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .swatch {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.375rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .selected-label {
+      font-size: 0.75rem;
+      color: #a78bfa;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .palette-card.selected .selected-label {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>BEC Solutions — Color Palette Explorer</h1>
+  <p class="subtitle">Click a palette to select it. We can refine your favorite.</p>
+
+  <div class="palettes" id="palettes"></div>
+
+  <script>
+    const palettes = [
+      {
+        id: 'current',
+        name: 'Current (Electric)',
+        desc: 'Cyan + purple — tech-forward',
+        heroBg: 'linear-gradient(135deg, #0a0a0c 0%, #12121a 100%)',
+        heroColor: '#fff',
+        accent: '#00f0ff',
+        accentMuted: 'rgba(0, 240, 255, 0.15)',
+        secondary: '#8b5cf6',
+        btnPrimary: '#00f0ff',
+        btnPrimaryText: '#0a0a0c',
+        cardBg: 'rgba(24, 24, 27, 0.6)',
+        cardBorder: 'rgba(255,255,255,0.1)',
+      },
+      {
+        id: 'teal',
+        name: 'Restrained Teal',
+        desc: 'Muted teal — premium, calm',
+        heroBg: 'linear-gradient(135deg, #0c0e0f 0%, #111415 100%)',
+        heroColor: '#fff',
+        accent: '#2dd4bf',
+        accentMuted: 'rgba(45, 212, 191, 0.15)',
+        secondary: '#5eead4',
+        btnPrimary: '#2dd4bf',
+        btnPrimaryText: '#0c0e0f',
+        cardBg: 'rgba(24, 24, 27, 0.6)',
+        cardBorder: 'rgba(255,255,255,0.08)',
+      },
+      {
+        id: 'amber',
+        name: 'Memphis Warm',
+        desc: 'Amber + gold — local, approachable',
+        heroBg: 'linear-gradient(135deg, #0f0c09 0%, #1a1510 100%)',
+        heroColor: '#fff',
+        accent: '#f59e0b',
+        accentMuted: 'rgba(245, 158, 11, 0.15)',
+        secondary: '#fbbf24',
+        btnPrimary: '#f59e0b',
+        btnPrimaryText: '#0f0c09',
+        cardBg: 'rgba(24, 24, 27, 0.6)',
+        cardBorder: 'rgba(255,255,255,0.08)',
+      },
+      {
+        id: 'ocean',
+        name: 'Ocean Blue',
+        desc: 'Soft blue — calm, trustworthy',
+        heroBg: 'linear-gradient(135deg, #0a0c14 0%, #0f1222 100%)',
+        heroColor: '#fff',
+        accent: '#60a5fa',
+        accentMuted: 'rgba(96, 165, 250, 0.15)',
+        secondary: '#93c5fd',
+        btnPrimary: '#60a5fa',
+        btnPrimaryText: '#0a0c14',
+        cardBg: 'rgba(24, 24, 27, 0.6)',
+        cardBorder: 'rgba(255,255,255,0.08)',
+      },
+      {
+        id: 'forest',
+        name: 'Forest',
+        desc: 'Muted green — growth, practical',
+        heroBg: 'linear-gradient(135deg, #0a0f0c 0%, #0f1512 100%)',
+        heroColor: '#fff',
+        accent: '#34d399',
+        accentMuted: 'rgba(52, 211, 153, 0.15)',
+        secondary: '#6ee7b7',
+        btnPrimary: '#34d399',
+        btnPrimaryText: '#0a0f0c',
+        cardBg: 'rgba(24, 24, 27, 0.6)',
+        cardBorder: 'rgba(255,255,255,0.08)',
+      },
+      {
+        id: 'mono',
+        name: 'Monochrome',
+        desc: 'Warm white on dark — minimal, sharp',
+        heroBg: 'linear-gradient(135deg, #0c0c0c 0%, #141414 100%)',
+        heroColor: '#fafafa',
+        accent: '#e4e4e7',
+        accentMuted: 'rgba(228, 228, 231, 0.1)',
+        secondary: '#a1a1aa',
+        btnPrimary: '#e4e4e7',
+        btnPrimaryText: '#0c0c0c',
+        cardBg: 'rgba(24, 24, 27, 0.6)',
+        cardBorder: 'rgba(255,255,255,0.1)',
+      },
+      { id: 'navy', name: 'Navy', desc: 'Deep blue — corporate, serious', heroBg: 'linear-gradient(135deg, #0a0f1a 0%, #0f1629 100%)', heroColor: '#fff', accent: '#3b82f6', accentMuted: 'rgba(59, 130, 246, 0.15)', secondary: '#60a5fa', btnPrimary: '#3b82f6', btnPrimaryText: '#fff', cardBg: 'rgba(15, 23, 42, 0.8)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'slate', name: 'Slate Blue', desc: 'Cool blue-grey — modern', heroBg: 'linear-gradient(135deg, #0f1419 0%, #1e293b 100%)', heroColor: '#f1f5f9', accent: '#64748b', accentMuted: 'rgba(100, 116, 139, 0.2)', secondary: '#94a3b8', btnPrimary: '#64748b', btnPrimaryText: '#fff', cardBg: 'rgba(30, 41, 59, 0.6)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'sky', name: 'Sky', desc: 'Light bright blue — fresh', heroBg: 'linear-gradient(135deg, #0c1222 0%, #1e3a5f 100%)', heroColor: '#fff', accent: '#0ea5e9', accentMuted: 'rgba(14, 165, 233, 0.15)', secondary: '#38bdf8', btnPrimary: '#0ea5e9', btnPrimaryText: '#fff', cardBg: 'rgba(15, 23, 42, 0.7)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'sage', name: 'Sage', desc: 'Muted green-grey — natural', heroBg: 'linear-gradient(135deg, #0f120f 0%, #1a1f1a 100%)', heroColor: '#e8f0e8', accent: '#84cc16', accentMuted: 'rgba(132, 204, 22, 0.15)', secondary: '#a3e635', btnPrimary: '#84cc16', btnPrimaryText: '#0f120f', cardBg: 'rgba(26, 31, 26, 0.6)', cardBorder: 'rgba(255,255,255,0.06)' },
+      { id: 'mint', name: 'Mint', desc: 'Soft green — clean, fresh', heroBg: 'linear-gradient(135deg, #091210 0%, #0f1f1a 100%)', heroColor: '#fff', accent: '#10b981', accentMuted: 'rgba(16, 185, 129, 0.15)', secondary: '#34d399', btnPrimary: '#10b981', btnPrimaryText: '#fff', cardBg: 'rgba(15, 31, 26, 0.6)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'emerald', name: 'Emerald', desc: 'Rich green — growth, premium', heroBg: 'linear-gradient(135deg, #051510 0%, #0a2a1e 100%)', heroColor: '#fff', accent: '#059669', accentMuted: 'rgba(5, 150, 105, 0.15)', secondary: '#10b981', btnPrimary: '#059669', btnPrimaryText: '#fff', cardBg: 'rgba(10, 42, 30, 0.6)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'coral', name: 'Coral', desc: 'Warm coral — friendly, energetic', heroBg: 'linear-gradient(135deg, #1a0f0c 0%, #2a1510 100%)', heroColor: '#fff', accent: '#f97316', accentMuted: 'rgba(249, 115, 22, 0.15)', secondary: '#fb923c', btnPrimary: '#f97316', btnPrimaryText: '#fff', cardBg: 'rgba(42, 21, 16, 0.6)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'terracotta', name: 'Terracotta', desc: 'Earthy orange — grounded', heroBg: 'linear-gradient(135deg, #1a120a 0%, #2a1a0f 100%)', heroColor: '#fef3c7', accent: '#d97706', accentMuted: 'rgba(217, 119, 6, 0.15)', secondary: '#f59e0b', btnPrimary: '#d97706', btnPrimaryText: '#fff', cardBg: 'rgba(42, 26, 15, 0.6)', cardBorder: 'rgba(255,255,255,0.06)' },
+      { id: 'copper', name: 'Copper', desc: 'Metallic warm — refined', heroBg: 'linear-gradient(135deg, #1a1410 0%, #2a2018 100%)', heroColor: '#fef3c7', accent: '#b45309', accentMuted: 'rgba(180, 83, 9, 0.15)', secondary: '#d97706', btnPrimary: '#b45309', btnPrimaryText: '#fff', cardBg: 'rgba(42, 32, 24, 0.6)', cardBorder: 'rgba(255,255,255,0.06)' },
+      { id: 'rose', name: 'Rose', desc: 'Soft pink — approachable', heroBg: 'linear-gradient(135deg, #1a0a12 0%, #2a1520 100%)', heroColor: '#fff', accent: '#f43f5e', accentMuted: 'rgba(244, 63, 94, 0.15)', secondary: '#fb7185', btnPrimary: '#f43f5e', btnPrimaryText: '#fff', cardBg: 'rgba(42, 21, 32, 0.6)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'violet', name: 'Violet', desc: 'Purple — creative, modern', heroBg: 'linear-gradient(135deg, #0f0a18 0%, #1a1229 100%)', heroColor: '#fff', accent: '#8b5cf6', accentMuted: 'rgba(139, 92, 246, 0.15)', secondary: '#a78bfa', btnPrimary: '#8b5cf6', btnPrimaryText: '#fff', cardBg: 'rgba(26, 18, 41, 0.6)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'indigo', name: 'Indigo', desc: 'Deep purple-blue — professional', heroBg: 'linear-gradient(135deg, #0c0a18 0%, #1e1b4b 100%)', heroColor: '#fff', accent: '#6366f1', accentMuted: 'rgba(99, 102, 241, 0.15)', secondary: '#818cf8', btnPrimary: '#6366f1', btnPrimaryText: '#fff', cardBg: 'rgba(30, 27, 75, 0.6)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'fuchsia', name: 'Fuchsia', desc: 'Vibrant magenta — bold', heroBg: 'linear-gradient(135deg, #180a18 0%, #2d1b2d 100%)', heroColor: '#fff', accent: '#d946ef', accentMuted: 'rgba(217, 70, 239, 0.15)', secondary: '#e879f9', btnPrimary: '#d946ef', btnPrimaryText: '#fff', cardBg: 'rgba(45, 27, 45, 0.6)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'crimson', name: 'Crimson', desc: 'Deep red — confident, strong', heroBg: 'linear-gradient(135deg, #1a0a0a 0%, #2a1515 100%)', heroColor: '#fff', accent: '#dc2626', accentMuted: 'rgba(220, 38, 38, 0.15)', secondary: '#ef4444', btnPrimary: '#dc2626', btnPrimaryText: '#fff', cardBg: 'rgba(42, 21, 21, 0.6)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'sepia', name: 'Sepia', desc: 'Warm brown tones — classic', heroBg: 'linear-gradient(135deg, #141210 0%, #1f1a18 100%)', heroColor: '#fef3c7', accent: '#a16207', accentMuted: 'rgba(161, 98, 7, 0.15)', secondary: '#ca8a04', btnPrimary: '#a16207', btnPrimaryText: '#fff', cardBg: 'rgba(31, 26, 24, 0.6)', cardBorder: 'rgba(255,255,255,0.06)' },
+      { id: 'steel', name: 'Steel', desc: 'Cool grey — industrial', heroBg: 'linear-gradient(135deg, #0f1214 0%, #1c2428 100%)', heroColor: '#f1f5f9', accent: '#64748b', accentMuted: 'rgba(100, 116, 139, 0.2)', secondary: '#94a3b8', btnPrimary: '#475569', btnPrimaryText: '#fff', cardBg: 'rgba(28, 36, 40, 0.6)', cardBorder: 'rgba(255,255,255,0.06)' },
+      { id: 'cream', name: 'Cream on Dark', desc: 'Warm off-white — soft contrast', heroBg: 'linear-gradient(135deg, #0f0e0c 0%, #1c1917 100%)', heroColor: '#faf5f0', accent: '#d6d3d1', accentMuted: 'rgba(214, 211, 209, 0.15)', secondary: '#e7e5e4', btnPrimary: '#d6d3d1', btnPrimaryText: '#0f0e0c', cardBg: 'rgba(28, 25, 23, 0.6)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'cyan-dark', name: 'Cyan (Darker)', desc: 'Deep cyan — less neon', heroBg: 'linear-gradient(135deg, #051418 0%, #0a2832 100%)', heroColor: '#fff', accent: '#0891b2', accentMuted: 'rgba(8, 145, 178, 0.15)', secondary: '#22d3ee', btnPrimary: '#0891b2', btnPrimaryText: '#fff', cardBg: 'rgba(10, 40, 50, 0.6)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'lime', name: 'Lime', desc: 'Bright green — energetic', heroBg: 'linear-gradient(135deg, #0d1108 0%, #1a2610 100%)', heroColor: '#fff', accent: '#65a30d', accentMuted: 'rgba(101, 163, 13, 0.15)', secondary: '#84cc16', btnPrimary: '#65a30d', btnPrimaryText: '#fff', cardBg: 'rgba(26, 38, 16, 0.6)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'plum', name: 'Plum', desc: 'Muted purple — sophisticated', heroBg: 'linear-gradient(135deg, #140f18 0%, #221b2a 100%)', heroColor: '#f5f0fa', accent: '#7c3aed', accentMuted: 'rgba(124, 58, 237, 0.15)', secondary: '#8b5cf6', btnPrimary: '#7c3aed', btnPrimaryText: '#fff', cardBg: 'rgba(34, 27, 42, 0.6)', cardBorder: 'rgba(255,255,255,0.06)' },
+      { id: 'sand', name: 'Sand', desc: 'Warm beige accent — earthy', heroBg: 'linear-gradient(135deg, #141210 0%, #1f1c18 100%)', heroColor: '#fef7ed', accent: '#d4a574', accentMuted: 'rgba(212, 165, 116, 0.15)', secondary: '#e8c9a8', btnPrimary: '#d4a574', btnPrimaryText: '#141210', cardBg: 'rgba(31, 28, 24, 0.6)', cardBorder: 'rgba(255,255,255,0.06)' },
+      { id: 'ice', name: 'Ice', desc: 'Cool blue-white — crisp', heroBg: 'linear-gradient(135deg, #0a0f14 0%, #0f1a24 100%)', heroColor: '#f0f9ff', accent: '#7dd3fc', accentMuted: 'rgba(125, 211, 252, 0.15)', secondary: '#bae6fd', btnPrimary: '#0ea5e9', btnPrimaryText: '#fff', cardBg: 'rgba(15, 26, 36, 0.6)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'sunset', name: 'Sunset', desc: 'Orange-pink gradient feel', heroBg: 'linear-gradient(135deg, #1a0c0f 0%, #2a1820 100%)', heroColor: '#fff', accent: '#fb7185', accentMuted: 'rgba(251, 113, 133, 0.15)', secondary: '#fda4af', btnPrimary: '#f43f5e', btnPrimaryText: '#fff', cardBg: 'rgba(42, 24, 32, 0.6)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'twilight', name: 'Twilight', desc: 'Blue-purple transition', heroBg: 'linear-gradient(135deg, #0a0c18 0%, #15152a 100%)', heroColor: '#fff', accent: '#818cf8', accentMuted: 'rgba(129, 140, 248, 0.15)', secondary: '#a5b4fc', btnPrimary: '#6366f1', btnPrimaryText: '#fff', cardBg: 'rgba(21, 21, 42, 0.6)', cardBorder: 'rgba(255,255,255,0.08)' },
+      { id: 'moss', name: 'Moss', desc: 'Dusty green — natural, organic', heroBg: 'linear-gradient(135deg, #0f120f 0%, #1a221a 100%)', heroColor: '#e8f0e8', accent: '#4d7c0f', accentMuted: 'rgba(77, 124, 15, 0.15)', secondary: '#65a30d', btnPrimary: '#4d7c0f', btnPrimaryText: '#fff', cardBg: 'rgba(26, 34, 26, 0.6)', cardBorder: 'rgba(255,255,255,0.06)' },
+      { id: 'ink', name: 'Ink', desc: 'True black + blue accent', heroBg: 'linear-gradient(135deg, #050508 0%, #0a0a12 100%)', heroColor: '#fafafa', accent: '#2563eb', accentMuted: 'rgba(37, 99, 235, 0.15)', secondary: '#3b82f6', btnPrimary: '#2563eb', btnPrimaryText: '#fff', cardBg: 'rgba(10, 10, 18, 0.8)', cardBorder: 'rgba(255,255,255,0.06)' },
+      // Light background palettes
+      { id: 'snow', name: 'Snow (Light)', desc: 'Pure white — clean, minimal', heroBg: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)', heroColor: '#0f172a', accent: '#0f172a', accentMuted: 'rgba(15, 23, 42, 0.1)', secondary: '#475569', btnPrimary: '#0f172a', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.9)', cardBorder: 'rgba(0,0,0,0.08)' },
+      { id: 'linen', name: 'Linen (Light)', desc: 'Warm off-white — soft, inviting', heroBg: 'linear-gradient(135deg, #fafaf9 0%, #f5f5f4 100%)', heroColor: '#1c1917', accent: '#78716c', accentMuted: 'rgba(120, 113, 108, 0.15)', secondary: '#a8a29e', btnPrimary: '#57534e', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'cloud', name: 'Cloud (Light)', desc: 'Light grey — subtle, professional', heroBg: 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)', heroColor: '#0f172a', accent: '#475569', accentMuted: 'rgba(71, 85, 105, 0.2)', secondary: '#64748b', btnPrimary: '#334155', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.08)' },
+      { id: 'pearl', name: 'Pearl (Light)', desc: 'Cool white — crisp, modern', heroBg: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)', heroColor: '#0f172a', accent: '#0ea5e9', accentMuted: 'rgba(14, 165, 233, 0.15)', secondary: '#38bdf8', btnPrimary: '#0284c7', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'cream-light', name: 'Cream (Light)', desc: 'Warm cream — cozy, approachable', heroBg: 'linear-gradient(135deg, #fefce8 0%, #fef9c3 100%)', heroColor: '#422006', accent: '#a16207', accentMuted: 'rgba(161, 98, 7, 0.2)', secondary: '#ca8a04', btnPrimary: '#b45309', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.9)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'mint-light', name: 'Mint (Light)', desc: 'Soft mint background — fresh', heroBg: 'linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%)', heroColor: '#052e16', accent: '#059669', accentMuted: 'rgba(5, 150, 105, 0.2)', secondary: '#10b981', btnPrimary: '#047857', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'sky-light', name: 'Sky (Light)', desc: 'Light blue tint — airy', heroBg: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)', heroColor: '#1e3a8a', accent: '#2563eb', accentMuted: 'rgba(37, 99, 235, 0.2)', secondary: '#3b82f6', btnPrimary: '#1d4ed8', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.9)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'lavender-light', name: 'Lavender (Light)', desc: 'Soft purple tint — soft, creative', heroBg: 'linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%)', heroColor: '#3b0764', accent: '#7c3aed', accentMuted: 'rgba(124, 58, 237, 0.2)', secondary: '#8b5cf6', btnPrimary: '#6d28d9', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'rose-light', name: 'Rose (Light)', desc: 'Blush tint — gentle, welcoming', heroBg: 'linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%)', heroColor: '#881337', accent: '#e11d48', accentMuted: 'rgba(225, 29, 72, 0.2)', secondary: '#f43f5e', btnPrimary: '#be123c', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'slate-light', name: 'Slate (Light)', desc: 'Cool grey light — editorial', heroBg: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)', heroColor: '#0f172a', accent: '#475569', accentMuted: 'rgba(71, 85, 105, 0.2)', secondary: '#64748b', btnPrimary: '#1e293b', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.08)' },
+      { id: 'sand-light', name: 'Sand (Light)', desc: 'Warm sand — earthy, grounded', heroBg: 'linear-gradient(135deg, #fef7ed 0%, #fed7aa 100%)', heroColor: '#431407', accent: '#c2410c', accentMuted: 'rgba(194, 65, 12, 0.2)', secondary: '#ea580c', btnPrimary: '#9a3412', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.9)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'sage-light', name: 'Sage (Light)', desc: 'Muted green light — natural', heroBg: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)', heroColor: '#14532d', accent: '#16a34a', accentMuted: 'rgba(22, 163, 74, 0.2)', secondary: '#22c55e', btnPrimary: '#15803d', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'ice-light', name: 'Ice (Light)', desc: 'Cool white-blue — crisp', heroBg: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)', heroColor: '#0c4a6e', accent: '#0284c7', accentMuted: 'rgba(2, 132, 199, 0.2)', secondary: '#0ea5e9', btnPrimary: '#0369a1', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'ivory', name: 'Ivory (Light)', desc: 'Warm white — classic', heroBg: 'linear-gradient(135deg, #fffffe 0%, #fafaf9 100%)', heroColor: '#292524', accent: '#57534e', accentMuted: 'rgba(87, 83, 78, 0.15)', secondary: '#78716c', btnPrimary: '#44403c', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.98)', cardBorder: 'rgba(0,0,0,0.08)' },
+      { id: 'paper', name: 'Paper (Light)', desc: 'Paper white — documentation feel', heroBg: 'linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%)', heroColor: '#171717', accent: '#404040', accentMuted: 'rgba(64, 64, 64, 0.15)', secondary: '#525252', btnPrimary: '#262626', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.98)', cardBorder: 'rgba(0,0,0,0.1)' },
+      { id: 'dawn', name: 'Dawn (Light)', desc: 'Warm sunrise — optimistic', heroBg: 'linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%)', heroColor: '#431407', accent: '#ea580c', accentMuted: 'rgba(234, 88, 12, 0.2)', secondary: '#f97316', btnPrimary: '#c2410c', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.9)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'frost', name: 'Frost (Light)', desc: 'Cool grey-white — minimal', heroBg: 'linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%)', heroColor: '#111827', accent: '#4b5563', accentMuted: 'rgba(75, 85, 99, 0.2)', secondary: '#6b7280', btnPrimary: '#374151', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.98)', cardBorder: 'rgba(0,0,0,0.08)' },
+      { id: 'oatmeal', name: 'Oatmeal (Light)', desc: 'Soft beige — warm, neutral', heroBg: 'linear-gradient(135deg, #faf8f5 0%, #f5f0eb 100%)', heroColor: '#292524', accent: '#78716c', accentMuted: 'rgba(120, 113, 108, 0.2)', secondary: '#a8a29e', btnPrimary: '#57534e', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'teal-light', name: 'Teal (Light)', desc: 'Light teal tint — fresh, calm', heroBg: 'linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%)', heroColor: '#134e4a', accent: '#0d9488', accentMuted: 'rgba(13, 148, 136, 0.2)', secondary: '#14b8a6', btnPrimary: '#0f766e', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'wisteria-light', name: 'Wisteria (Light)', desc: 'Soft purple-grey — elegant', heroBg: 'linear-gradient(135deg, #faf5ff 0%, #ede9fe 100%)', heroColor: '#4c1d95', accent: '#7c3aed', accentMuted: 'rgba(124, 58, 237, 0.2)', secondary: '#8b5cf6', btnPrimary: '#5b21b6', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'ink-light', name: 'Ink on White', desc: 'Dark navy on white — sharp contrast', heroBg: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)', heroColor: '#0f172a', accent: '#1e40af', accentMuted: 'rgba(30, 64, 175, 0.15)', secondary: '#2563eb', btnPrimary: '#1e3a8a', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.98)', cardBorder: 'rgba(0,0,0,0.1)' },
+      // More Ice/Cloud-like — cool light palettes
+      { id: 'mist', name: 'Mist (Light)', desc: 'Very light blue-grey — soft, airy', heroBg: 'linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%)', heroColor: '#1e293b', accent: '#6366f1', accentMuted: 'rgba(99, 102, 241, 0.15)', secondary: '#818cf8', btnPrimary: '#4f46e5', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'fog', name: 'Fog (Light)', desc: 'Light grey-blue — understated', heroBg: 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)', heroColor: '#0f172a', accent: '#64748b', accentMuted: 'rgba(100, 116, 139, 0.2)', secondary: '#94a3b8', btnPrimary: '#475569', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.08)' },
+      { id: 'glacier', name: 'Glacier (Light)', desc: 'Cool white-blue — crisp, clean', heroBg: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)', heroColor: '#0c4a6e', accent: '#0369a1', accentMuted: 'rgba(3, 105, 161, 0.2)', secondary: '#0ea5e9', btnPrimary: '#0284c7', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'silver-light', name: 'Silver (Light)', desc: 'Soft silver-grey — neutral cool', heroBg: 'linear-gradient(135deg, #fafafa 0%, #f4f4f5 100%)', heroColor: '#18181b', accent: '#52525b', accentMuted: 'rgba(82, 82, 91, 0.2)', secondary: '#71717a', btnPrimary: '#3f3f46', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.98)', cardBorder: 'rgba(0,0,0,0.08)' },
+      { id: 'zinc-light', name: 'Zinc (Light)', desc: 'Cool neutral grey — minimal', heroBg: 'linear-gradient(135deg, #fafafb 0%, #f4f4f5 100%)', heroColor: '#18181b', accent: '#3f3f46', accentMuted: 'rgba(63, 63, 70, 0.15)', secondary: '#52525b', btnPrimary: '#27272a', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.98)', cardBorder: 'rgba(0,0,0,0.08)' },
+      { id: 'stone-light', name: 'Stone (Light)', desc: 'Cool stone grey — refined', heroBg: 'linear-gradient(135deg, #fafaf9 0%, #f5f5f4 100%)', heroColor: '#1c1917', accent: '#57534e', accentMuted: 'rgba(87, 83, 78, 0.15)', secondary: '#78716c', btnPrimary: '#44403c', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.98)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'slate-blue-light', name: 'Slate Blue (Light)', desc: 'Blue-tinted grey — cool professional', heroBg: 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)', heroColor: '#0f172a', accent: '#334155', accentMuted: 'rgba(51, 65, 85, 0.2)', secondary: '#475569', btnPrimary: '#1e293b', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.08)' },
+      { id: 'porcelain', name: 'Porcelain (Light)', desc: 'Cool white — crisp, clinical', heroBg: 'linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%)', heroColor: '#0c4a6e', accent: '#0ea5e9', accentMuted: 'rgba(14, 165, 233, 0.15)', secondary: '#38bdf8', btnPrimary: '#0284c7', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.98)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'breeze', name: 'Breeze (Light)', desc: 'Very light blue — airy, soft', heroBg: 'linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%)', heroColor: '#0e7490', accent: '#0891b2', accentMuted: 'rgba(8, 145, 178, 0.2)', secondary: '#22d3ee', btnPrimary: '#0e7490', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'ash-light', name: 'Ash (Light)', desc: 'Muted cool grey — soft', heroBg: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)', heroColor: '#334155', accent: '#64748b', accentMuted: 'rgba(100, 116, 139, 0.2)', secondary: '#94a3b8', btnPrimary: '#475569', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.98)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'hoarfrost', name: 'Hoarfrost (Light)', desc: 'Lightest blue-grey — delicate', heroBg: 'linear-gradient(135deg, #f0f9ff 0%, #f1f5f9 100%)', heroColor: '#1e293b', accent: '#0ea5e9', accentMuted: 'rgba(14, 165, 233, 0.2)', secondary: '#38bdf8', btnPrimary: '#0284c7', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.98)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'overcast', name: 'Overcast (Light)', desc: 'Soft grey — calm, even', heroBg: 'linear-gradient(135deg, #f5f5f7 0%, #e8e8ec 100%)', heroColor: '#1f2937', accent: '#4b5563', accentMuted: 'rgba(75, 85, 99, 0.2)', secondary: '#6b7280', btnPrimary: '#374151', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.08)' },
+      { id: 'steel-light', name: 'Steel (Light)', desc: 'Cool steel grey — industrial', heroBg: 'linear-gradient(135deg, #f4f4f5 0%, #e4e4e7 100%)', heroColor: '#18181b', accent: '#3f3f46', accentMuted: 'rgba(63, 63, 70, 0.2)', secondary: '#71717a', btnPrimary: '#27272a', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.95)', cardBorder: 'rgba(0,0,0,0.08)' },
+      { id: 'snowdrift', name: 'Snowdrift (Light)', desc: 'Blue-tinted white — winter soft', heroBg: 'linear-gradient(135deg, #fafbfc 0%, #eef4fb 100%)', heroColor: '#1e3a5f', accent: '#3b82f6', accentMuted: 'rgba(59, 130, 246, 0.15)', secondary: '#60a5fa', btnPrimary: '#2563eb', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.98)', cardBorder: 'rgba(0,0,0,0.06)' },
+      { id: 'haze', name: 'Haze (Light)', desc: 'Very light grey-blue — subtle', heroBg: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)', heroColor: '#334155', accent: '#64748b', accentMuted: 'rgba(100, 116, 139, 0.15)', secondary: '#94a3b8', btnPrimary: '#475569', btnPrimaryText: '#fff', cardBg: 'rgba(255,255,255,0.98)', cardBorder: 'rgba(0,0,0,0.06)' },
+    ];
+
+    const container = document.getElementById('palettes');
+    let selectedId = null;
+
+    palettes.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'palette-card';
+      card.dataset.id = p.id;
+      card.innerHTML = `
+        <div class="palette-name">${p.name}</div>
+        <div class="palette-desc">${p.desc}</div>
+        <div class="swatches">
+          <div class="swatch" style="background:${p.btnPrimary}" title="Primary"></div>
+          <div class="swatch" style="background:${p.secondary}" title="Secondary"></div>
+        </div>
+        <div class="preview">
+          <div class="preview-hero" style="background:${p.heroBg};color:${p.heroColor}">
+            <h2>Your team is doing work a computer should handle.</h2>
+            <p>We find those tasks and make them stop.</p>
+          </div>
+          <div class="preview-buttons" style="background:${p.heroBg}">
+            <button class="preview-btn" style="background:${p.btnPrimary};color:${p.btnPrimaryText}">Book a Free Audit</button>
+            <button class="preview-btn" style="background:transparent;border:1px solid ${p.accent};color:${p.accent}">See What We Automate</button>
+          </div>
+          <div class="preview-card" style="background:${p.cardBg};border:1px solid ${p.cardBorder}">
+            <strong style="color:${p.accent}">Lead Response</strong><br>
+            Faster first-touch and follow-up so opportunities don't sit untouched.
+          </div>
+        </div>
+        <div class="selected-label">✓ Selected — tell me this one and we can refine</div>
+      `;
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.palette-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        selectedId = p.id;
+      });
+      container.appendChild(card);
+    });
+  </script>
+</body>
+
+</html>

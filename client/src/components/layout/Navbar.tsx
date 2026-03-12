@@ -23,11 +23,10 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
-        isScrolled 
-          ? "bg-background/80 backdrop-blur-md border-white/10 py-3 shadow-lg" 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${isScrolled
+          ? "bg-background/80 backdrop-blur-md border-border py-3 shadow-lg"
           : "bg-transparent border-transparent py-5"
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
@@ -43,25 +42,24 @@ export function Navbar() {
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link 
-                key={link.href} 
+              <Link
+                key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors duration-200 hover:text-primary ${
-                  location === link.href ? "text-primary" : "text-muted-foreground"
-                }`}
+                className={`text-sm font-medium transition-colors duration-200 hover:text-primary ${location === link.href ? "text-primary" : "text-muted-foreground"
+                  }`}
               >
                 {link.label}
               </Link>
             ))}
             <Link href="/#contact">
-              <Button className="rounded-full px-6 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all">
+              <Button className="rounded-full px-6 bg-primary text-primary-foreground hover:bg-primary/90 transition-all">
                 Get Started
               </Button>
             </Link>
           </nav>
 
           {/* Mobile Menu Toggle */}
-          <button 
+          <button
             className="md:hidden p-2 text-muted-foreground hover:text-foreground"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -77,17 +75,16 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-card/95 backdrop-blur-xl border-b border-white/10 overflow-hidden"
+            className="md:hidden bg-card/95 backdrop-blur-xl border-b border-border overflow-hidden"
           >
             <div className="px-4 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
-                <Link 
-                  key={link.href} 
+                <Link
+                  key={link.href}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`text-lg font-medium p-2 rounded-lg transition-colors ${
-                    location === link.href ? "bg-primary/10 text-primary" : "text-muted-foreground"
-                  }`}
+                  className={`text-lg font-medium p-2 rounded-lg transition-colors ${location === link.href ? "bg-primary/10 text-primary" : "text-muted-foreground"
+                    }`}
                 >
                   {link.label}
                 </Link>

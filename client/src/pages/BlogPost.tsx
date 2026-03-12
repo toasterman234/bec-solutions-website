@@ -52,7 +52,7 @@ export default function BlogPost() {
             ))}
           </div>
 
-          <div className="mt-12 pt-8 border-t border-white/10 text-center">
+          <div className="mt-12 pt-8 border-t border-border text-center">
             <h3 className="font-display text-2xl font-bold mb-4">Ready to get started?</h3>
             <Link href="/#contact">
               <Button size="lg" className="rounded-full px-8 bg-primary text-primary-foreground hover:bg-primary/90">

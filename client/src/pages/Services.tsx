@@ -87,7 +87,7 @@ export default function Services() {
     <div className="min-h-screen pt-24 pb-20">
 
       {/* ── HERO ── */}
-      <section className="py-24 relative overflow-hidden border-b border-white/5">
+      <section className="py-24 relative overflow-hidden border-b border-border">
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[120px] pointer-events-none" />
         <div className="max-w-5xl mx-auto px-6 relative z-10">
           <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-3xl">
@@ -100,7 +100,7 @@ export default function Services() {
             </motion.p>
             <motion.div variants={fadeInUp}>
               <Link href="/#contact">
-                <Button size="lg" className="rounded-full px-8 py-5 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_25px_rgba(0,240,255,0.2)] transition-all duration-300">
+                <Button size="lg" className="rounded-full px-8 py-5 bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_4px_24px_-4px_hsl(var(--primary)/0.3)] transition-all duration-300">
                   Start with a free audit <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
@@ -110,21 +110,21 @@ export default function Services() {
       </section>
 
       {/* ── HOW IT WORKS ── */}
-      <section className="py-24 border-b border-white/5">
+      <section className="py-24 border-b border-border">
         <div className="max-w-5xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.h2 variants={fadeInUp} className="font-display text-3xl md:text-4xl font-bold mb-16 text-center">How it works</motion.h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               {steps.map((step, i) => (
                 <motion.div key={i} variants={fadeInUp} className="relative">
-                  <span className="font-display text-6xl font-bold text-white/5 absolute -top-4 -left-2 select-none">{step.number}</span>
+                  <span className="font-display text-6xl font-bold text-foreground/5 absolute -top-4 -left-2 select-none">{step.number}</span>
                   <div className="relative z-10 pt-6">
                     <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">{step.number}</p>
                     <h3 className="font-display text-xl font-bold mb-3">{step.title}</h3>
                     <p className="text-muted-foreground leading-relaxed text-sm">{step.desc}</p>
                   </div>
                   {i < steps.length - 1 && (
-                    <div className="hidden md:block absolute top-10 -right-5 text-white/10">
+                    <div className="hidden md:block absolute top-10 -right-5 text-foreground/10">
                       <ArrowRight className="w-5 h-5" />
                     </div>
                   )}
@@ -153,7 +153,7 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.05 }}
-                className="glass-card rounded-2xl p-6 border border-white/8 hover:border-white/15 transition-all duration-300 group"
+                className="glass-card rounded-2xl p-6 border border-border hover:border-primary/20 transition-all duration-300 group"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="p-2 rounded-lg bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors duration-300">

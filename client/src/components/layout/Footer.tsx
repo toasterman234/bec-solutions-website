@@ -3,7 +3,7 @@ import { Cpu, MapPin, Mail, Phone } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-card border-t border-white/5 pt-16 pb-8">
+    <footer className="bg-card border-t border-border pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-2">
@@ -19,7 +19,7 @@ export function Footer() {
               Empowering local Memphis businesses with state-of-the-art AI integration and workflow automation. We don't just upgrade your tech; we upgrade your potential.
             </p>
           </div>
-          
+
           <div>
             <h4 className="font-display font-semibold text-lg mb-4 text-foreground">Company</h4>
             <ul className="space-y-3">
@@ -40,7 +40,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-3 text-muted-foreground">
                 <MapPin className="w-5 h-5 text-primary shrink-0" />
-                <span>Memphis, TN<br/>Local & Proud</span>
+                <span>Memphis, TN<br />Local & Proud</span>
               </li>
               <li className="flex items-center gap-3 text-muted-foreground">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
@@ -53,8 +53,8 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+
+        <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} BEC Solutions. All rights reserved.
           </p>

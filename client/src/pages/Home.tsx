@@ -83,8 +83,8 @@ const niches = [
       "A reliable sales process that doesn't depend on someone remembering",
     ],
     accent: "from-primary/10 to-accent/10",
-    border: "border-white/10",
-    tag: "bg-white/10 text-white/80",
+    border: "border-border",
+    tag: "bg-primary/10 text-foreground/80",
   },
   {
     label: "Contractors & Trade Businesses",
@@ -166,7 +166,7 @@ export default function Home() {
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
         <div className="max-w-5xl mx-auto px-6 relative z-10">
           <motion.div initial="hidden" animate="visible" variants={stagger} className="text-center">
-            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm text-muted-foreground mb-10">
+            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-foreground/5 border border-border text-sm text-muted-foreground mb-10">
               <MapPin className="w-3.5 h-3.5 text-primary" />
               Memphis-Based & Proud
             </motion.div>
@@ -180,7 +180,7 @@ export default function Home() {
             </motion.p>
             <motion.div variants={fadeInUp}>
               <Link href="/#contact">
-                <Button size="lg" className="rounded-full px-10 py-6 text-lg bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_30px_rgba(0,240,255,0.25)] transition-all duration-300">
+                <Button size="lg" className="rounded-full px-10 py-6 text-lg bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_4px_24px_-4px_hsl(var(--primary)/0.35)] transition-all duration-300">
                   Book a Free Workflow Audit
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
@@ -192,10 +192,10 @@ export default function Home() {
       </section>
 
       {/* ── BRIDGE ── */}
-      <section className="py-20 border-y border-white/5 bg-card/30">
+      <section className="py-20 border-y border-border bg-card/50">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.p variants={fadeInUp} className="text-2xl md:text-3xl font-display font-semibold leading-snug text-white/90">
+            <motion.p variants={fadeInUp} className="text-2xl md:text-3xl font-display font-semibold leading-snug text-foreground/90">
               We map out the repetitive, manual work eating your team's time —{" "}
               <span className="text-gradient">then we automate it.</span>
             </motion.p>
@@ -232,28 +232,28 @@ export default function Home() {
                     <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-3">What you're living with</p>
                     <ul className="space-y-3">
                       {niche.pains.map((pain, j) => (
-                        <li key={j} className="flex items-start gap-3 text-sm text-white/80">
+                        <li key={j} className="flex items-start gap-3 text-sm text-foreground/80">
                           <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-muted-foreground/50 shrink-0" />
                           {pain}
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <div className="pt-6 border-t border-white/10">
+                  <div className="pt-6 border-t border-border">
                     <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-3">What we fix</p>
                     <ul className="space-y-3">
                       {niche.fixes.map((fix, j) => (
-                        <li key={j} className="flex items-start gap-3 text-sm text-white/90">
+                        <li key={j} className="flex items-start gap-3 text-sm text-foreground/90">
                           <CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                           {fix}
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <div className="mt-6 pt-5 border-t border-white/10 flex items-center justify-between">
+                  <div className="mt-6 pt-5 border-t border-border flex items-center justify-between">
                     <p className="text-xs text-muted-foreground italic">Case study coming soon.</p>
                     <Link href="/#contact">
-                      <Button variant="outline" size="sm" className="rounded-full border-white/20 hover:bg-white/5 text-xs">
+                      <Button variant="outline" size="sm" className="rounded-full border-primary/30 hover:bg-foreground/5 text-xs">
                         Let's talk <ArrowRight className="ml-1 w-3 h-3" />
                       </Button>
                     </Link>
@@ -266,11 +266,11 @@ export default function Home() {
       </section>
 
       {/* ── MEMPHIS CALLOUT ── */}
-      <section className="py-16 border-y border-white/5 bg-card/20">
+      <section className="py-16 border-y border-border bg-card/50">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <p className="text-muted-foreground text-sm uppercase tracking-widest font-medium mb-4">Rooted in Memphis</p>
-            <p className="font-display text-2xl md:text-3xl font-semibold text-white/90 leading-snug">
+            <p className="font-display text-2xl md:text-3xl font-semibold text-foreground/90 leading-snug">
               We're not a national agency guessing at your market.<br className="hidden md:block" />
               We're local — and we know what Memphis businesses actually need.
             </p>
@@ -298,14 +298,14 @@ export default function Home() {
                   <FormField control={form.control} name="name" render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-foreground/80">Name</FormLabel>
-                      <FormControl><Input placeholder="Jane Smith" className="bg-background/50 border-white/10 focus-visible:ring-primary rounded-xl h-12" {...field} /></FormControl>
+                      <FormControl><Input placeholder="Jane Smith" className="bg-background/50 border-border focus-visible:ring-primary rounded-xl h-12" {...field} /></FormControl>
                       <FormMessage />
                     </FormItem>
                   )} />
                   <FormField control={form.control} name="email" render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-foreground/80">Email</FormLabel>
-                      <FormControl><Input type="email" placeholder="jane@yourbusiness.com" className="bg-background/50 border-white/10 focus-visible:ring-primary rounded-xl h-12" {...field} /></FormControl>
+                      <FormControl><Input type="email" placeholder="jane@yourbusiness.com" className="bg-background/50 border-border focus-visible:ring-primary rounded-xl h-12" {...field} /></FormControl>
                       <FormMessage />
                     </FormItem>
                   )} />
@@ -313,7 +313,7 @@ export default function Home() {
                 <FormField control={form.control} name="company" render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-foreground/80">Business Name <span className="text-muted-foreground">(optional)</span></FormLabel>
-                    <FormControl><Input placeholder="Your Business LLC" className="bg-background/50 border-white/10 focus-visible:ring-primary rounded-xl h-12" {...field} value={field.value || ""} /></FormControl>
+                    <FormControl><Input placeholder="Your Business LLC" className="bg-background/50 border-border focus-visible:ring-primary rounded-xl h-12" {...field} value={field.value || ""} /></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />
@@ -321,7 +321,7 @@ export default function Home() {
                   <FormItem>
                     <FormLabel className="text-foreground/80">What's eating your team's time?</FormLabel>
                     <FormControl>
-                      <Textarea placeholder="We spend hours every week on scheduling follow-ups and nobody actually does them..." className="min-h-[120px] bg-background/50 border-white/10 focus-visible:ring-primary rounded-xl resize-none" {...field} />
+                      <Textarea placeholder="We spend hours every week on scheduling follow-ups and nobody actually does them..." className="min-h-[120px] bg-background/50 border-border focus-visible:ring-primary rounded-xl resize-none" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

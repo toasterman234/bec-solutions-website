@@ -17,7 +17,7 @@ const staggerContainer = {
 export default function Blog() {
   return (
     <div className="min-h-screen pt-24">
-      <section className="py-16 md:py-24 border-b border-white/5">
+      <section className="py-16 md:py-24 border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="max-w-3xl">
             <motion.div variants={fadeInUp}>
@@ -38,7 +38,7 @@ export default function Blog() {
             {blogPosts.map((post) => (
               <motion.article key={post.id} variants={fadeInUp} className="group cursor-pointer">
                 <Link href={`/blog/${post.slug}`}>
-                  <div className="overflow-hidden rounded-2xl bg-card border border-white/5 hover:border-white/10 transition-all duration-300 h-full flex flex-col hover-elevate">
+                  <div className="overflow-hidden rounded-2xl bg-card border border-border hover:border-primary/20 transition-all duration-300 h-full flex flex-col hover-elevate">
                     {post.imageUrl && (
                       <div className="h-48 overflow-hidden bg-background/50">
                         <img src={post.imageUrl} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
@@ -63,7 +63,7 @@ export default function Blog() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-card/50 border-t border-white/5">
+      <section className="py-16 md:py-24 bg-card/50 border-t border-border">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your Business?</h2>
