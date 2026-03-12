@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { Cpu, MapPin, Mail, Phone } from "lucide-react";
+import { ThemePicker } from "./ThemePicker";
 
 export function Footer() {
   return (
@@ -59,6 +60,7 @@ export function Footer() {
             © {new Date().getFullYear()} BEC Solutions. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
+            <ThemePicker />
             <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
           </div>
